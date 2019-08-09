@@ -1,7 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+
 <h1>New Post</h1>
 
 <form action="" method="post" enctype="multipart/form-data">
+    {% comment %} {% %} or {{}} means that this is a token language following the python rules inside it {% endcomment %}
     {% csrf_token %} {% comment %} security of Django {% endcomment %}
     {{ form.as_p }} {% comment %} as_p is a function to show all the info from form as paragraphs {% endcomment %}
     <button type="submit">Save</button>
 </form>
+
+{% endblock content %}

@@ -1,3 +1,7 @@
+{% extends "base.html" %}
+
+{% block content %}
+
 <h1>Sign Up</h1>
 
 {% comment %} multipart/form-data is used because the profile pics need to be upload {% endcomment %}
@@ -8,3 +12,5 @@
     {{ form.as_p }} 
     <button type="submit">Sign Up</button>
 </form>
+
+{% endblock content %}
