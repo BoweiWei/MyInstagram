@@ -1,9 +1,33 @@
 {% load static %}
 
+<ul>
+    {% comment %} check if its logged in  {% endcomment %}
+    {% if request.user.is_authenticated%}
+        <li>
+            Hi, {{request.user.username}}
+        </li>
+        <li>
+            <a href="{% url 'logout'%}"> Logout</a>
+        </li>
+    {% else %}
+        <li>
+            <a href="{% url 'login' %}"> Login</a>
+        </li>
+        <li>
+            <a href="{% url 'signup' %}"> Signup</a>
+        </li>
+    {% endif %}
+</ul>
+
 <div>
-    {% for post in object_list %}
+    <a href="{% url 'make_post' %}">Make Post</a>
+</div>
+
+
+<div>
+    {% for post in object_list %} 
         <a href="{% url 'post_detail' post.id %}">
-            <img src="/{{post.image}}">
+            <img src="/{{post.image}}"> {% comment %} / means search in the root dir {% endcomment %}
         </a>
     {% endfor %}
 </div> 

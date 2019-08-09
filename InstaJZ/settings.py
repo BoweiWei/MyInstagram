@@ -119,5 +119,16 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
+# Specify all the static file location for system to find
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+
+# Specify what page should direct to after login
+LOGIN_REDIRECT_URL = 'posts'
+
+# Specify what page should direct to after logout
+LOGOUT_REDIRECT_URL = 'posts'
+
+# Change the default user model to InstaUser created in models.py
+# App name + Class name
+AUTH_USER_MODEL = 'Insta.InstaUser'

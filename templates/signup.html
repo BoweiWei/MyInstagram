@@ -1,0 +1,10 @@
+<h1>Sign Up</h1>
+
+{% comment %} multipart/form-data is used because the profile pics need to be upload {% endcomment %}
+<form method="post" enctype="multipart/form-data">
+    {% comment %} security of Django {% endcomment %}
+    {% csrf_token %} 
+    {% comment %} as_p is a function to show all the info from form as paragraphs {% endcomment %}
+    {{ form.as_p }} 
+    <button type="submit">Sign Up</button>
+</form>
