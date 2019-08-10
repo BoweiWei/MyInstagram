@@ -10,15 +10,20 @@ function error_cb(error) {
  */
 
 function create_like(success_cb, error_cb) {
+    // 'this' is the icon we found from html file 
     var post_pk = $(this).siblings('.hidden-data').find('.post-pk').text();
     console.log(post_pk);
-
+    // create like
+    // ajax is a function for same page operation
     $.ajax({
+        // ajax request a operation -> transfer the request to url
         type: "POST",
         url: '/insta/like',
         data: {
             post_pk : post_pk
         },
+        // if success, run function success_cb
+        // if error, run error_cb
         success: function(data) { success_cb(data); },
         error: function(error) { error_cb(error); }
     });
@@ -29,6 +34,7 @@ function like_update_view(data) {
 
     // toggle heart
     var $hiddenData = $('.hidden-data.' + data.post_pk);
+    // data.result is the returned json from addLike in views.py 
     if (data.result) {
       $hiddenData.siblings('.submit-like').removeClass('fa-heart-o').addClass('fa-heart');
     } else {
@@ -36,14 +42,19 @@ function like_update_view(data) {
     }
   
     // update like count
+    // if data.result == 1, difference = 1, if data.result == 0, difference = -1
     var difference = data.result ? 1 : -1;
+    // find post
     var $post = $('.view-update.' + data.post_pk);
+    // find likes on the post
     var $likes = $post.find('.likes');
+    // find the number of likes on this post
     var likes = parseInt($likes.text());
+    // update the likes
     likes = likes + difference;
   
     console.log('likes', likes);
-  
+    
     if (likes == null || isNaN(likes)) {
       $likes.text('1 like');
     } else if (likes === 0) {
@@ -54,8 +65,11 @@ function like_update_view(data) {
       $likes.text(likes + ' likes');
     }
 }
- 
+
+// $ means that find all the sumbit-like from all the html files
+// .on means that if click is happened, it will do the following function
 $('.submit-like').on('click', function() {
+    // 'this' is $('.submit-like')
     create_like.call(this, like_update_view, error_cb);
 });
 
@@ -84,7 +98,7 @@ function create_comment(success_cb, error_cb) {
   
     $.ajax({
       type: "POST",
-      url: '/comment',
+      url: '/insta/comment',
       data: {
         comment_text: comment_text,
         post_pk: post_pk
