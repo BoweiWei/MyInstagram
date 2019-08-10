@@ -8,7 +8,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         {% comment %} website name {% endcomment %}
         <title>Bowei's Insta</title>
-        {% comment %} connect all the style (css file) together {% endcomment %}
+        {% comment %} contact all the style (css file) together {% endcomment %}
+        {% comment %} bootstrap is a pre defined css template {% endcomment %}
         <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
         <link href="{% static 'vendor/font-awesome-4.6.3/css/font-awesome.min.css' %}" rel="stylesheet">
         <link href="{% static 'css/style.css' %}" rel="stylesheet">
@@ -25,11 +26,14 @@
             </div>
         </div>
 
+        {% comment %} add other stuff like css into the html with js {% endcomment %}
+        {% comment %} usuallly these files are loaded in the base html file so that every html with extends will have them on board {% endcomment %}
         <script type="text/javascript" src="{% static 'js/jquery-3.1.0.min.js' %}"></script>
         <script type="text/javascript" src="{% static 'vendor/bootstrap/js/bootstrap.min.js' %}"></script>
         <script type="text/javascript" src="{% static 'js/ajax-csrf-auth.js' %}"></script>
         <script type="text/javascript" src="{% static 'js/index.js' %}"></script>
 
+        {% comment %} some html has its own content. this is the block for them {% endcomment %}
         {% block extrascript %}
         {% endblock %}
 
