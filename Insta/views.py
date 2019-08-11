@@ -19,14 +19,14 @@ class PostsView(ListView):
     login_url = "login"
 
     # check query to filter all the posts are not from me or my followings
-    def get_queryset(self):
-        current_user = self.request.user
-        following = set()
-        for conn in UserConnection.objects.filter(creator=current_user).select_related('following'):
-            following.add(conn.following)
-        # you can see your own post ofc
-        following.add(current_user)
-        return Post.objects.filter(author__in=following)
+    # def get_queryset(self):
+    #     current_user = self.request.user
+    #     following = set()
+    #     for conn in UserConnection.objects.filter(creator=current_user).select_related('following'):
+    #         following.add(conn.following)
+    #     # you can see your own post ofc
+    #     following.add(current_user)
+    #     return Post.objects.filter(author__in=following)
 
 # Use the models Post on to the post_detail html file
 class PostDetailView(DetailView):
