@@ -126,6 +126,7 @@ USE_TZ = True
 # Specify all the static file location for system to find
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # Specify what page should direct to after login
 LOGIN_REDIRECT_URL = 'posts'
