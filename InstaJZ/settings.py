@@ -137,3 +137,4 @@ LOGOUT_REDIRECT_URL = 'login'
 # App name + Class name
 AUTH_USER_MODEL = 'Insta.InstaUser'
 
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
