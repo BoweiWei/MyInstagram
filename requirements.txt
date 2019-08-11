@@ -1,1 +1,1 @@
-imagekit == 3.0.3
+imagekit == 1.0.6
