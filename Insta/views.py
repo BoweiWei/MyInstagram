@@ -1,13 +1,13 @@
 from annoying.decorators import ajax_request
 from django.views.generic import DetailView, TemplateView, ListView
-from django.views.generic import CreateView, UpdateView, DeleteView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 
 
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 from Insta.forms import CustomUserCreationForm
-from Insta.models import Post, Like, Comment
+from Insta.models import Post, Like, Comment, InstaUser, UserConnection
 
 # Create your views here.
 class HelloWorld(TemplateView):
@@ -21,6 +21,10 @@ class PostsView(ListView):
 class PostDetailView(DetailView):
     model = Post
     template_name = "post_detail.html"
+
+class UserDetailView(DetailView):
+    model = InstaUser
+    template_name = "user_detail.html"
 
 # Controller for creating post
 # LoginRequiredMixin is identifier to see whether user is logged in.
@@ -41,6 +45,12 @@ class PostUpdateView(UpdateView):
     # only title is allowed to update at this point
     fields = ['title']
 
+class UserEdit(UpdateView):
+    model = InstaUser
+    template_name = 'edit_profile.html'
+    # only title is allowed to update at this point
+    fields = ['profile_pic', 'email']
+
 class PostDeleteView(DeleteView):
     model = Post
     template_name = 'post_delete.html'
@@ -53,6 +63,32 @@ class SignUp(CreateView):
     form_class = CustomUserCreationForm
     template_name = 'signup.html'
     success_url = reverse_lazy('posts')
+
+@ajax_request
+def toggleFollow(request):
+    current_user = InstaUser.objects.get(pk=request.user.pk)
+    follow_user_pk = request.POST.get('follow_user_pk')
+    follow_user = InstaUser.objects.get(pk=follow_user_pk)
+
+    try:
+        if current_user != follow_user:
+            if request.POST.get('type') == 'follow':
+                connection = UserConnection(creator=current_user, following=follow_user)
+                connection.save()
+            elif request.POST.get('type') == 'unfollow':
+                UserConnection.objects.filter(creator=current_user, following=follow_user).delete()
+            result = 1
+        else:
+            result = 0
+    except Exception as e:
+        print(e)
+        result = 0
+
+    return {
+        'result': result,
+        'type': request.POST.get('type'),
+        'follow_user_pk': follow_user_pk
+    }
 
 # @ajax_request means this function only response to ajax, so no need to 
 # render it to a html file

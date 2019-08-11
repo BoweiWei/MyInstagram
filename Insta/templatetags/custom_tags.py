@@ -8,7 +8,10 @@ from Insta.models import Like
 register = template.Library()
 
 @register.simple_tag
+# current_user is the logged in user
+# background_user is the user we are visiting
 def is_following(current_user, background_user):
+    # check if the the background_user's follower list has current_user element
     return background_user.get_followers().filter(creator=current_user).exists()
 
 # @register.simple_tag is a standard grammar

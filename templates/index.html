@@ -13,7 +13,7 @@
             
                 <div class="card__panel-head">
                     <div class="poster__info">
-                        <a href="{% url 'helloworld' %}" class="poster__name">
+                        <a href="{% url 'user_detail' post.author.id %}" class="poster__name">
                             {% comment %} if author has a profile picture {% endcomment %}
                             {% if post.author.profile_pic %}
                                 {% comment %} / means search in the root dir {% endcomment %}
@@ -41,7 +41,7 @@
                         {% for comment in post.comments.all %}
                         <li class="comment-list__comment">
                             {% comment %} {% url 'profile' comment.user.pk %} {% endcomment %}
-                            <a href="{% url 'helloworld' %}" class="user">
+                            <a href="{% url 'user_detail' comment.user.id %}" class="user">
                                 {{ comment.user.username }}
                             </a>
                             <span class="comment">{{ comment.comment }}</span>

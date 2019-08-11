@@ -132,3 +132,4 @@ LOGOUT_REDIRECT_URL = 'posts'
 # Change the default user model to InstaUser created in models.py
 # App name + Class name
 AUTH_USER_MODEL = 'Insta.InstaUser'
+
