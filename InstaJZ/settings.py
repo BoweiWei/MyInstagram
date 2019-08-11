@@ -127,7 +127,7 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 LOGIN_REDIRECT_URL = 'posts'
 
 # Specify what page should direct to after logout
-LOGOUT_REDIRECT_URL = 'posts'
+LOGOUT_REDIRECT_URL = 'login'
 
 # Change the default user model to InstaUser created in models.py
 # App name + Class name

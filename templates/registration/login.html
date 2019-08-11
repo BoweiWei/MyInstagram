@@ -1,7 +1,15 @@
-<h1>Login</h1>
+{% extends "base.html" %}
+
+{% block content %}
+
+
+<h2>Login</h2>
 
 <form method="post">
     {% csrf_token %} {% comment %} security of Django {% endcomment %}
     {{ form.as_p }} {% comment %} as_p is a function to show all the info from form as paragraphs {% endcomment %}
     <button type="submit">Login</button>
 </form>
+
+
+{% endblock content %}
