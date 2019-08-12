@@ -61,7 +61,7 @@ class UserEdit(UpdateView):
     template_name = 'edit_profile.html'
     # only title is allowed to update at this point
     fields = ['profile_pic', 'email']
-    success_url = reverse_lazy('user_detail.html')
+    success_url = reverse_lazy('user_detail')
 
 class PostDeleteView(DeleteView):
     model = Post
